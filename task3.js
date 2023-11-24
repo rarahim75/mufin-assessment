@@ -5,6 +5,23 @@ const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker');
 const PDFExtract = require('pdf.js-extract').PDFExtract;
 const { translate } = require('google-translate-api-browser');
 
+  /* 
+    Task 3 was a bit tricky. First, i attempted to do it like what was suggested in the Performance
+    Assessment guide i.e. extract the text content from PDF file, translate them and finally overlapping
+    the original content in place (i believe that is what was meant in the guide). I searched for a
+    good library that could extract text content from a PDF file but i could not find one which was
+    reliable and accurate. I'm confident if i had more time, i would be able to find one but for the
+    purpose of this demo, i had decided to try an alternative approach and that is to find free online PDF
+    file translator and automate it to do exactly that.
+
+    I tried with 2 websites.  One is DocTranslator (Task3b) and the other one Google Translator (Task3c).
+    As DocTranslator still uses Google Translator behind the scene, it is slower than using Google Translator
+    directly.
+
+    So, for Task 3, my final solution is Task3c. Task3a is my latest attempt at using an NPM module to extract
+    raw text content from PDF, but it did not work too well.
+  */
+
 async function Task3a() {
   const pdfExtract = new PDFExtract();
   const options = {};
@@ -35,46 +52,6 @@ async function Task3a() {
 }
 
 async function Task3b() {
-  puppeteer.use(StealthPlugin());
-  puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
-
-  console.log("Starting Task3b...");  
-
-  let browser = await puppeteer.launch({ headless: false, defaultViewport: false });
-
-  try {
-    let page = await browser.newPage();
-  
-    await page.goto("https://translate.google.com/?sl=auto&tl=en&op=docs&hl=en");
-  
-    let fileToUpload = ".\\files\\demo_123_merged.pdf";
-    if (fileToUpload.length == 0)
-      throw new Error();
-
-    await page.waitForXPath("(//*[@type='file'])[1]");
-    const inputUploadHandle = await page.$x("(//*[@type='file'])[1]", { visible: true });
-    await inputUploadHandle[0].uploadFile(fileToUpload);
-  
-    let buttonTranslate = await page.$x("//button/span[text()='Translate']/..");
-    await buttonTranslate[0].click();
-  
-    await page.waitForXPath("//span[text()='Download translation']", { visible: true });
-    // await page.waitForTimeout(1000);
-  
-    let buttonDownload = await page.$x("//span[text()='Download translation']/..");
-    await buttonDownload[0].click();
-    
-    await page.waitForTimeout(3000);
-
-  } catch (error) {
-    console.error(error);
-  } finally {
-    // if (browser) await browser.close();
-    console.log("Done.");  
-  }
-}
-
-async function Task3c() {
   // puppeteer.use(StealthPlugin());
   puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
 
@@ -119,4 +96,44 @@ async function Task3c() {
   }
 }
 
-Task3b();
+async function Task3c() {
+  puppeteer.use(StealthPlugin());
+  puppeteer.use(AdblockerPlugin({ blockTrackers: true }));
+
+  console.log("Starting Task3b...");  
+
+  let browser = await puppeteer.launch({ headless: false, defaultViewport: false });
+
+  try {
+    let page = await browser.newPage();
+  
+    await page.goto("https://translate.google.com/?sl=auto&tl=en&op=docs&hl=en");
+  
+    let fileToUpload = ".\\files\\demo_123_merged.pdf";
+    if (fileToUpload.length == 0)
+      throw new Error();
+
+    await page.waitForXPath("(//*[@type='file'])[1]");
+    const inputUploadHandle = await page.$x("(//*[@type='file'])[1]", { visible: true });
+    await inputUploadHandle[0].uploadFile(fileToUpload);
+  
+    let buttonTranslate = await page.$x("//button/span[text()='Translate']/..");
+    await buttonTranslate[0].click();
+  
+    await page.waitForXPath("//span[text()='Download translation']", { visible: true });
+    // await page.waitForTimeout(1000);
+  
+    let buttonDownload = await page.$x("//span[text()='Download translation']/..");
+    await buttonDownload[0].click();
+    
+    await page.waitForTimeout(3000);
+
+  } catch (error) {
+    console.error(error);
+  } finally {
+    // if (browser) await browser.close();
+    console.log("Done.");  
+  }
+}
+
+Task3c();

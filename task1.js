@@ -18,6 +18,26 @@ async function Task1a() {
   await page.waitForSelector("button.btnLogin.btnLine.btnNormal.btnLine_blue");
   await page.click("button.btnLogin.btnLine.btnNormal.btnLine_blue");
 
+  /* 
+    I was not able to proceed beyond this point because all accounts given could not be used due to 
+    needing password resets. In order to still display my ability in RPA, i decided to find similar
+    website that requires similar types of operations like the original one above, namely the
+    website requires automating the following user interactions:
+      1) launching browser and navigating to a website URL
+      2) logging in to an online account
+      3) entering search keywords inside search textbox
+      4) clicking links and buttons
+      5) downloading a PDf file
+    
+    The website chosen is the website for Lenovo Support where Task1b is in English and Task1c is in Korean.
+    In addition to the user operations above, this website also requires solving a captcha. However,
+    in the short time that i had, i could not find a way to automate the action. There is a way (or ways)  
+    to do it but it is using a paid service. So i decided to prompt the user to solve it manually
+    for the purpose of this demo.
+
+    So, for Task 1, my final solution is Task1c.
+  */
+
   // if (browser) await browser.close();
 }
 
@@ -93,7 +113,7 @@ async function Task1b() {
     console.log(url);
   
     https.get(url, (res) => {
-      const file = fs.createWriteStream("download.pdf");
+      const file = fs.createWriteStream("download_en.pdf");
   
       res.pipe(file);
   

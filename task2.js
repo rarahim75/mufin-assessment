@@ -2,6 +2,10 @@
 const PDFDocument = require('pdf-lib').PDFDocument;
 const fs = require('fs');
 
+  /* 
+    Task 2 was straightforward and i had no issue completing it.
+  */
+ 
 async function Task2() {
 
   console.log("Starting Task2...");
