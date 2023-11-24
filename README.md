@@ -1,10 +1,10 @@
 
 ## Task 1
 
-I was not able to proceed beyond this point because all accounts given could not be used due to 
-needing password resets. In order to still display my ability in RPA, i decided to find similar
-website that requires similar types of operations like the original one above, namely the
-website requires automating the following user interactions:
+I was not able to proceed beyond the login page for the original [test website](https://www.eais.go.kr/) 
+because all accounts given could not be used due to needing password resets. In order to still display my 
+ability in RPA, i decided to find similar website that requires similar types of operations like the 
+original one above, namely the website requires automating the following user interactions:
   1) launching browser and navigating to a website URL
   2) logging in to an online account
   3) entering search keywords inside search textbox

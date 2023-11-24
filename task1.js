@@ -7,22 +7,11 @@ const https = require('https');
 const prompt = require('prompt-sync')();
 const { USERNAME, PASSWORD } = require('./secret');
 
-async function Task1a() {
-  console.log("Starting Task1a...");  
-
-  let browser = await puppeteer.launch({ headless: false, defaultViewport: false });
-  let page = await browser.newPage();
-
-  await page.goto("https://www.eais.go.kr/");
-
-  await page.waitForSelector("button.btnLogin.btnLine.btnNormal.btnLine_blue");
-  await page.click("button.btnLogin.btnLine.btnNormal.btnLine_blue");
-
   /* 
-    I was not able to proceed beyond this point because all accounts given could not be used due to 
-    needing password resets. In order to still display my ability in RPA, i decided to find similar
-    website that requires similar types of operations like the original one above, namely the
-    website requires automating the following user interactions:
+    I was not able to proceed beyond the login page for the original test website because all accounts 
+    given could not be used due to needing password resets. In order to still display my ability in RPA, 
+    i decided to find similar website that requires similar types of operations like the original one 
+    above, namely the website requires automating the following user interactions:
       1) launching browser and navigating to a website URL
       2) logging in to an online account
       3) entering search keywords inside search textbox
@@ -37,6 +26,17 @@ async function Task1a() {
 
     So, for Task 1, my final solution is Task1c.
   */
+
+async function Task1a() {
+  console.log("Starting Task1a...");  
+
+  let browser = await puppeteer.launch({ headless: false, defaultViewport: false });
+  let page = await browser.newPage();
+
+  await page.goto("https://www.eais.go.kr/", { timeout: 60000 });
+
+  await page.waitForSelector("button.btnLogin.btnLine.btnNormal.btnLine_blue");
+  await page.click("button.btnLogin.btnLine.btnNormal.btnLine_blue");
 
   // if (browser) await browser.close();
 }
