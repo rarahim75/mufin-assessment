@@ -1,0 +1,22 @@
+{
+  "name": "muffin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/translate": "^8.0.2",
+    "google-translate-api-browser": "^4.1.0",
+    "pdf-lib": "^1.17.1",
+    "pdf.js-extract": "^0.2.1",
+    "prompt-sync": "^4.2.0",
+    "puppeteer": "^21.5.2",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-adblocker": "^2.13.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}
